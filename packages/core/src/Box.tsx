@@ -1,9 +1,10 @@
 import React, { useContext, useMemo } from 'react';
 import { LayoutContext } from './shared';
+import { jsx, css } from '@emotion/core';
 
 type BoxProps<T extends keyof React.ReactHTML> = {
   spacer?: boolean; // Will try to fill the container
-  sideBar?: boolean; // Will get 100% width in small screen
+  sidebar?: boolean; // Will get 100% width in small screen
   minWidth?: string;
   minHeight?: string;
   border?: boolean | string;
@@ -16,21 +17,22 @@ type BoxProps<T extends keyof React.ReactHTML> = {
   // default as "div"
   as?: T;
   children?: React.ReactNode;
-  elementProps?: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
 };
 
 export function Box<T extends keyof React.ReactHTML>(props: BoxProps<T>): JSX.Element {
-  const { as = 'div', children, spacer, minWidth, sideBar } = props;
+  const { as = 'div', children, spacer, minWidth, sidebar, border, padding } = props;
 
-  const { rowGap } = useContext(LayoutContext);
+  const { rowGap, childMinWidth } = useContext(LayoutContext);
 
-  const style = useMemo(() => {
-    return {
-      flexGrow: spacer  ? 1 : undefined,
-      marginLeft: children ? undefined : '-' + rowGap,
-      minWidth,
-    };
-  }, [spacer, rowGap, children, minWidth]);
+  const style = {
+    flexGrow: spacer ? 9999 : sidebar ? 1 : undefined,
+    flexBasis: childMinWidth ?? 0,
+    flexShrink: 0,
+    marginLeft: children ? undefined : '-' + rowGap,
+    minWidth,
+    border: border ? '2px solid #4a4a4a' : undefined,
+    padding,
+  };
 
-  return React.createElement(as, { style }, children);
+  return jsx(as, { css: css(style) }, children);
 }

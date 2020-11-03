@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { LayoutContext } from './shared';
+import { jsx, css, CSSObject } from '@emotion/core';
 
 type RowProps<T extends keyof React.ReactHTML> = {
   gap?: string; // default is 1rem
@@ -14,21 +15,39 @@ type RowProps<T extends keyof React.ReactHTML> = {
   elementProps?: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
 };
 
+function getOverflowStyle(overflow: Exclude<RowProps<any>['overflow'], undefined>): CSSObject {
+  switch (overflow) {
+    case 'hidden':
+      return {
+        overflow: 'hidden',
+      };
+    case 'scroll':
+      return {
+        overflow: 'auto',
+      };
+    case 'shrink':
+      return {
+        flexWrap: 'nowrap',
+      };
+    case 'wrap':
+      return {
+        flexWrap: 'wrap',
+      };
+  }
+}
 export function Row<T extends keyof React.ReactHTML>(props: RowProps<T>): JSX.Element {
-  const { as = 'div', children, grid, gap = '1rem', overflow = 'wrap' } = props;
+  const { as = 'div', children, grid, gap = '1rem', overflow = 'wrap', childMinWidth } = props;
 
-  const style = useMemo(() => {
-    return {
-      display: 'flex',
-      columnGap: gap,
-      flexWrap: overflow === 'wrap' ? 'wrap' : undefined,
-      alignItems: 'start',
-    };
-  }, [gap, overflow]);
+  const style = {
+    display: 'flex',
+    columnGap: gap,
+    alignItems: 'start',
+    ...getOverflowStyle(overflow),
+  };
 
   return React.createElement(
     LayoutContext.Provider,
-    { value: { rowGap: gap } },
-    React.createElement(as, { style }, children)
+    { value: { rowGap: gap, childMinWidth } },
+    jsx(as, { css: css(style) }, children)
   );
 }
