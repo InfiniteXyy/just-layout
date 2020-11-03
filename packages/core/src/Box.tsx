@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 type BoxProps<T extends keyof React.ReactHTML> = {
   spacer?: boolean; // Will try to fill the container
@@ -19,6 +19,14 @@ type BoxProps<T extends keyof React.ReactHTML> = {
 };
 
 export function Box<T extends keyof React.ReactHTML>(props: BoxProps<T>): JSX.Element {
-  const { as = 'div', children } = props;
-  return React.createElement(as, {}, children);
+  const { as = 'div', children, spacer } = props;
+
+  const style = useMemo(() => {
+    if (spacer)
+      return {
+        flexGrow: 1,
+      };
+    return {};
+  }, [spacer]);
+  return React.createElement(as, { style }, children);
 }

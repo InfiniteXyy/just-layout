@@ -1,16 +1,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Box, Row } from 'just-layout';
+import styled from '@emotion/styled';
+
+const Container = styled.div`
+  ul {
+    margin-block-start: 0;
+    padding-inline-start: 0;
+  }
+`;
+const Li = styled.li`
+  list-style: none;
+  padding: 10px 16px;
+  border: 2px solid #4a4a4a;
+  margin-bottom: 8px;
+`;
+
+const Image = styled.div`
+  height: 120px;
+  width: 200px;
+  margin-bottom: 8px;
+  background-color: #9b9b9b;
+`;
 
 function App() {
   return (
-    <div>
-      <Row gap="2em">
-        <div>Layout</div>
-        <div>CSS</div>
-        <div>JavaScript</div>
+    <Container>
+      <Row gap={8} as="ul">
+        <Li>Layout</Li>
+        <Li>CSS</Li>
+        <Li>JavaScript</Li>
       </Row>
-    </div>
+      <Row>
+        <Image />
+        <Box spacer />
+        <Row as="ul">
+          <Li>Layout</Li>
+          <Li>CSS</Li>
+          <Li>JavaScript</Li>
+        </Row>
+      </Row>
+    </Container>
   );
 }
 
