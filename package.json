@@ -1,0 +1,11 @@
+{
+  "name": "just-layout-monorepo",
+  "version": "0.0.1",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {},
+  "author": "Yiyang Xu",
+  "license": "MIT",
+  "private": true
+}

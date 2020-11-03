@@ -1,0 +1,29 @@
+{
+  "name": "just-layout",
+  "version": "0.0.1",
+  "description": "Just a tiny layout library for React.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "rollup -c -w",
+    "build": "rollup -c"
+  },
+  "main": "./dist/just-layout.js",
+  "module": "./dist/just-layout.esm.js",
+  "types": "./dist/index.d.ts",
+  "keywords": [
+    "atom",
+    "layout library",
+    "react"
+  ],
+  "author": "Yiyang Xu",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.55",
+    "rollup": "^2.33.1",
+    "rollup-plugin-typescript2": "^0.29.0",
+    "typescript": "^4.0.5"
+  }
+}
