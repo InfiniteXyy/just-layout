@@ -8,6 +8,7 @@
     "dev": "concurrently --kill-others \"yarn dev:lib\" \"yarn dev:example\"",
     "dev:lib": "yarn workspace just-layout run dev",
     "dev:example": "yarn workspace just-layout-example run start",
+    "build:lib": "yarn workspace just-layout run build",
     "build:example": "yarn workspace just-layout-example run build"
   },
   "author": "Yiyang Xu",
