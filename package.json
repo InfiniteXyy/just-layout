@@ -4,8 +4,15 @@
   "workspaces": [
     "packages/*"
   ],
-  "scripts": {},
+  "scripts": {
+    "dev": "concurrently --kill-others \"yarn dev:lib\" \"yarn dev:example\"",
+    "dev:lib": "yarn workspace just-layout run dev",
+    "dev:example": "yarn workspace just-layout-example run start"
+  },
   "author": "Yiyang Xu",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  }
 }
