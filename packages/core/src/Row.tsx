@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
+import { LayoutContext } from './shared';
 
 type RowProps<T extends keyof React.ReactHTML> = {
-  gap?: string | number; // default is 1rem
-  childMinWidth?: number; // Will display items vertically if cannot satisfy
+  gap?: string; // default is 1rem
+  childMinWidth?: string; // Will display items vertically if cannot satisfy
   grid?: boolean; // Work with childMinWidth, will display like grid
   overflow?: 'shrink' | 'wrap' | 'hidden' | 'scroll'; // default is wrap
   inline?: boolean; // work as inline component
@@ -21,9 +22,13 @@ export function Row<T extends keyof React.ReactHTML>(props: RowProps<T>): JSX.El
       display: 'flex',
       columnGap: gap,
       flexWrap: overflow === 'wrap' ? 'wrap' : undefined,
-      alignItems: 'start'
+      alignItems: 'start',
     };
   }, [gap, overflow]);
 
-  return React.createElement(as, { style }, children);
+  return React.createElement(
+    LayoutContext.Provider,
+    { value: { rowGap: gap } },
+    React.createElement(as, { style }, children)
+  );
 }

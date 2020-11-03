@@ -18,7 +18,7 @@ const Li = styled.li`
 
 const Image = styled.div`
   height: 120px;
-  width: 200px;
+  min-width: 200px;
   margin-bottom: 8px;
   background-color: #9b9b9b;
 `;
@@ -26,7 +26,7 @@ const Image = styled.div`
 function App() {
   return (
     <Container>
-      <Row gap={8} as="ul">
+      <Row gap="8px" as="ul">
         <Li>Layout</Li>
         <Li>CSS</Li>
         <Li>JavaScript</Li>
@@ -39,6 +39,25 @@ function App() {
           <Li>CSS</Li>
           <Li>JavaScript</Li>
         </Row>
+      </Row>
+      <Row>
+        <Box spacer />
+        <h1>center</h1>
+        <Box spacer />
+      </Row>
+      <Row>
+        <Image />
+        <Box spacer minWidth="20em">
+          <p>blah...</p>
+        </Box>
+      </Row>
+      <Row>
+        <Box sideBar>
+          <Image />
+        </Box>
+        <Box spacer minWidth="20em">
+          <p>blah...</p>
+        </Box>
       </Row>
     </Container>
   );

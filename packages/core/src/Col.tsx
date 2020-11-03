@@ -1,7 +1,7 @@
 import React from 'react';
 
 type ColProps = {
-  gap?: number; // default is 1rem
+  gap?: string; // default is 1rem
   overflow?: 'shrink' | 'wrap' | 'hidden' | 'scroll'; // default is hidden
 };
 
